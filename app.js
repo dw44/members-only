@@ -42,7 +42,7 @@ passport.deserializeUser((id, done) => {
 });
 
 app.use(expressLayouts);
-app.use(session({secret: process.env.secret, resave: false, saveUninitialized: true}));
+app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
