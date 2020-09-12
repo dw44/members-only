@@ -9,10 +9,8 @@ router.get('/', (req, res, next) => {
   res.render('home');
 });
 
-router.get('/sign-up', (req, res, next) => {
-  res.render('signupForm', {title: 'Sign Up'});
-});
+router.get('/sign-up', userController.signupGET);
 
-router.post('/sign-up', userController.signUpPOST);
+router.post('/sign-up', userController.signupPOST);
 
 module.exports = router;
