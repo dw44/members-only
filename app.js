@@ -1,11 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressLayouts = require('express-ejs-layouts');
 const connectDB = require('./config/db');
+
+const indexRouter = require('./routes/index');
 
 dotenv.config({path: './config/config.env'});
 const app = express();
@@ -45,14 +48,11 @@ app.use(expressLayouts);
 app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-});
-
-app.get('/', (req, res) => {
-    res.send('Work in progress!');
-});
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', indexRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port: ${process.env.PORT}`);

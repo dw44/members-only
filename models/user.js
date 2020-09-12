@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   firstName: {
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  } 
+  }
 });
 
 UserSchema.virtual('fullName').get(function () {
