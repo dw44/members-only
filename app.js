@@ -7,6 +7,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressLayouts = require('express-ejs-layouts');
 const connectDB = require('./config/db');
+const User = require('./models/user');
+const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
 
@@ -19,7 +21,7 @@ app.set('view engine', 'ejs');
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    User.findOne({usename: username}, (err, user) => {
+    User.findOne({username: username}, (err, user) => {
       if (err) {
         return done(err);
       };

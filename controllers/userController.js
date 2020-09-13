@@ -1,12 +1,10 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
-const user = require('../models/user');
 
 exports.signupGET = (req, res, next) => {
   res.render('signupForm', { title: 'Sign Up' });
-}
+};
 
 exports.signupPOST = [
   // Validate + Sanitize
@@ -82,3 +80,8 @@ exports.signupPOST = [
       });
   }
 ];
+
+exports.signInGET = (req, res, next) => {
+  res.render('signin', { title: 'Log In' });
+};
+
