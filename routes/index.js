@@ -7,7 +7,7 @@ const userController = require('../controllers/userController');
 const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
-  res.render('home', { title: 'Home' });
+  res.render('home', { title: 'Home', auth: req.isAuthenticated() });
 });
 
 router.get('/sign-up', userController.signupGET);
@@ -20,5 +20,7 @@ router.post('/sign-in', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/sign-in'
 }));
+
+router.get('/sign-out', userController.signOutGET)
 
 module.exports = router;

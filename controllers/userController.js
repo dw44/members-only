@@ -3,7 +3,7 @@ const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 
 exports.signupGET = (req, res, next) => {
-  res.render('signupForm', { title: 'Sign Up' });
+  res.render('signupForm', { title: 'Sign Up', auth: req.isAuthenticated() });
 };
 
 exports.signupPOST = [
@@ -82,6 +82,11 @@ exports.signupPOST = [
 ];
 
 exports.signInGET = (req, res, next) => {
-  res.render('signin', { title: 'Log In' });
+  res.render('signin', { title: 'Log In', auth: req.isAuthenticated() });
 };
 
+exports.signOutGET = (req, res, next) => {
+  if (!req.isAuthenticated()) return;
+  req.logout();
+  res.redirect('/');
+}
