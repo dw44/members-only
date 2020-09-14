@@ -1,0 +1,10 @@
+<% if (auth) { %>
+  <h1>Authenticated</h1>
+  <% messages.forEach(msg => { %>
+    <div class="msg-card">
+      <h2 class="msg-title"><%= msg.title %></h2>
+      <p class="msg-content"><%= msg.content %> </p>
+      <p class="msg-author"><%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
+    </div>
+  <% }) %>
+<% } %>
