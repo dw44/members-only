@@ -11,6 +11,7 @@ const User = require('./models/user');
 const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
+const messageRouter = require('./routes/messages');
 
 dotenv.config({path: './config/config.env'});
 const app = express();
@@ -55,6 +56,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
+app.use('/messages', messageRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port: ${process.env.PORT}`);
