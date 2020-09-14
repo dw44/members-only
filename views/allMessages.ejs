@@ -4,7 +4,7 @@
     <div class="msg-card">
       <h2 class="msg-title"><%= msg.title %></h2>
       <p class="msg-content"><%= msg.content %> </p>
-      <p class="msg-author"><%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
+      <p class="msg-author">by <%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
     </div>
   <% }) %>
 <% } %>

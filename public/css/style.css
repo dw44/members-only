@@ -72,3 +72,21 @@ nav {
   padding: 30px;
   box-shadow: 3px 3px 3px #444;
 }
+
+.msg-title {
+  font-size: 1.8em;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+
+.msg-content {
+}
+
+.msg-author {
+  margin-top: 20px;
+  font-weight: 300;
+  font-style: italic;
+  text-decoration: none;  
+}
