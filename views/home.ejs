@@ -1,4 +1,11 @@
-<div>
-  <h1>Home</h1>
-  <h2><%= auth %></h2> 
-</div>
+<% messages.forEach(msg => { %>
+  <div class="msg-card">
+    <h2 class="msg-title"><%= msg.title %></h2>
+    <p class="msg-content"><%= msg.content %> </p>
+    <% if (auth) { %>
+      <p class="msg-author">by <%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
+    <% } else { %>
+      <p class="msg-author">by XXXX (Sign In to see author) </p>
+    <% } %>
+  </div>
+<% }) %>

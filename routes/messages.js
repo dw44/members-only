@@ -8,8 +8,6 @@ const Message = require('../models/message');
 
 const { body, validationResult } = require('express-validator');
 
-router.get('/', messageController.allMessagesGET);
-
 router.get('/new', messageController.newMessageGET);
 
 router.post('/new', messageController.newMessagePOST);

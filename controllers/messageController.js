@@ -2,19 +2,6 @@ const User = require('../models/user');
 const Message = require('../models/message');
 const { body, validationResult } = require('express-validator');
 
-exports.allMessagesGET = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    res.redirect('/sign-in');
-  } else {
-    Message.find({})
-      .populate('user')
-      .sort([['message.date', 'ascending']])
-      .exec((err, messages) => {
-        if (err) return next(err);
-        res.render('allMessages', { title: 'All Messages', auth: req.isAuthenticated(), messages: messages});
-      });
-  }
-}
 
 exports.newMessageGET = (req, res, next) => {
   res.render('newMessage', { title: 'Add Message', auth: req.isAuthenticated() });

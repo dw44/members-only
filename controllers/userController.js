@@ -1,6 +1,17 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const Message = require('../models/message');
 const { body, validationResult } = require('express-validator');
+
+exports.homeGET = (req, res, next) => {
+  Message.find({})
+    .populate('user')
+    .sort([['message.date', 'ascending']])
+    .exec((err, messages) => {
+      if (err) return next(err);
+      res.render('home', { title: 'All Messages', auth: req.isAuthenticated(), messages: messages});
+    });
+}
 
 exports.signupGET = (req, res, next) => {
   res.render('signupForm', { title: 'Sign Up', auth: req.isAuthenticated() });
@@ -22,7 +33,7 @@ exports.signupPOST = [
 
   body('username')
     .notEmpty().withMessage('Username field cannot be empty.')
-    .isLength({ min: 6, max: 20 }).withMessage('Username must be between 6 and 20 characters')
+    .isLength({ min: 3, max: 20 }).withMessage('Username must be between 6 and 20 characters')
     .trim()
     .escape(),
 
@@ -54,7 +65,7 @@ exports.signupPOST = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render('signupForm', { title: 'Sign Up', errors: errors.array() });
+      res.render('signupForm', { title: 'Sign Up', auth: req.isAuthenticated(), errors: errors.array() });
       return;
     }
     await User.find({ username: req.body.username })
@@ -73,7 +84,7 @@ exports.signupPOST = [
               password: hashedPassword
             }).save(err => {
               if (err) return next(err);
-              res.render('signupForm', { title: 'Sign Up' });
+              res.render('signupForm', { title: 'Sign Up', auth: req.isAuthenticated() });
             });
           });
         }  

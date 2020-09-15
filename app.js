@@ -56,7 +56,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
-app.use('/messages', messageRouter);
+app.use('/message', messageRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port: ${process.env.PORT}`);

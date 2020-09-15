@@ -6,9 +6,7 @@ const userController = require('../controllers/userController');
 
 const User = require('../models/user');
 
-router.get('/', (req, res, next) => {
-  res.render('home', { title: 'Home', auth: req.isAuthenticated() });
-});
+router.get('/', userController.homeGET);
 
 router.get('/sign-up', userController.signupGET);
 
