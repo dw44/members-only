@@ -3,8 +3,14 @@
     <h2 class="msg-title"><%= msg.title %></h2>
     <p class="msg-content"><%= msg.content %> </p>
     <% if (auth) { %>
-      <p class="msg-author">by <%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
-    <% } else { %>
+      <div class="msg-data">
+        <p class="msg-author">by <%= `${msg.user.firstName} ${msg.user.lastName}` %> </p>
+        <p class="msg-date"><%= format(msg.time, "yyyy-MM-dd' --- 'HH:mm:ss") %></p>
+      </div>
+      <% if (user.admin) { %>
+        <a class="" href="<%= `/messages/${msg._id}/delete` %>">Delete</a>
+      <% } %>
+      <% } else { %>
       <p class="msg-author">by XXXX (Sign In to see author) </p>
     <% } %>
   </div>

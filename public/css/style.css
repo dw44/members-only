@@ -84,8 +84,14 @@ nav {
 .msg-content {
 }
 
-.msg-author {
+.msg-data {
   margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.msg-data > p{
+  display: inline;
   font-weight: 300;
   font-style: italic;
   text-decoration: none;  

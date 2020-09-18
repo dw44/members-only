@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Message = require('../models/message');
 const { body, validationResult } = require('express-validator');
+const format = require('date-fns/format');
 
 exports.homeGET = (req, res, next) => {
   Message.find({})
@@ -9,7 +10,9 @@ exports.homeGET = (req, res, next) => {
     .sort([['message.date', 'ascending']])
     .exec((err, messages) => {
       if (err) return next(err);
-      res.render('home', { title: 'All Messages', auth: req.isAuthenticated(), messages: messages});
+      console.log(req.user);
+      console.log(format);
+      res.render('home', { title: 'All Messages', auth: req.isAuthenticated(), user: req.user, messages: messages, format: format});
     });
 }
 

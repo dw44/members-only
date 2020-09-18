@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Message = require('../models/message');
-const { body, validationResult } = require('express-validator');
 
+const { body, validationResult } = require('express-validator');
 
 exports.newMessageGET = (req, res, next) => {
   res.render('newMessage', { title: 'Add Message', auth: req.isAuthenticated() });
@@ -41,3 +41,22 @@ exports.newMessagePOST = [
     }));
   }
 ];
+
+exports.deleteMessageGET = (req, res, next) => {
+  Message.findById( req.params.messageId )
+    .exec((err, message) => {
+      if (err) return next(err);
+      if (!(req.isAuthenticated() && req.user.admin)) {
+        res.redirect('/')
+      } else {
+        res.render('deleteMessage', { title: 'Delete Message', auth: req.isAuthenticated(), message });
+      }
+    });
+};
+
+exports.deleteMessagePOST = (req, res, next) => {
+  Message.findByIdAndDelete(req.body.id, err => {
+    if (err) return next(err);
+    res.redirect('/');
+  });
+};
